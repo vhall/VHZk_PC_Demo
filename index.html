@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <!-- qq分享显示的标题-->
+  <meta itemprop="name" content="微吼知客jssdk-pc-demo"/>
+  <!-- qq分享显示的缩略图-->
+  <meta itemprop="image" content=""/>
+  <!-- qq分享显示的简介-->
+  <meta itemprop="description" name="description" content="微吼知客jssdk-pc-demo"/>
+  <title>微吼知客jssdk-pc-demo</title>
+  <link name="shortcut-icon" rel="icon" href="<%=process.env.PUBLIC_PATH%><%=process.env.SUB_DIR%>/img/favicon.ico" type="image/x-icon" />
+  <link name="shortcut-icon" rel="shortcut icon" href="<%=process.env.PUBLIC_PATH%><%=process.env.SUB_DIR%>/img/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="//cnstatic01.e.vhall.com/3rdlibs/zhike/pc_iconfont/1.9.5.7/iconfont.css?t=123"/>
+  <link rel="stylesheet" href="//cnstatic01.e.vhall.com/3rdlibs/element-ui/2.4.9/index.css">
+  <style>
+    .b-support{display: none;position: fixed;top: 0;left: 0;z-index: 9000;height: 100%;width: 100%;background-color: rgba(0,0,0,.8);}
+    .b-support .support-box{position: absolute;width: 600px;height: 400px;text-align: center;margin:auto;top:0;left:0;bottom:0;right:0;z-index: 9001;background-color: #fff;}
+  </style>
+</head>
+
+<body>
+  <script>
+    function checkWebp(){
+      try {
+        window.webp = (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0);
+        if (window.webp) {
+          document.body.setAttribute('class', 'webp')
+        }
+      } catch(err) {
+        window.webp = false
+      }
+    }
+    checkWebp()
+  </script>
+  <div id="root"></div>
+  <div class="b-support" id="supportId">
+    <div class="support-box">
+      <p style="margin-top: 14%;">暂不支持此浏览器，推荐您使用以下浏览器观看直播</p>
+      <div style="width: 500px;margin: 30px auto 0 auto;">
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">Chrome</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">Firefox</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">Edge</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">搜狗浏览器</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">360浏览器</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">QQ浏览器</span>
+        <span style="display: inline-block;width: 130px;height: 40px;line-height: 40px;margin: 10px 8px;border-radius: 5px;border: solid 1px #e2e2e2;">safari</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    if (!isSupport()) {
+      document.getElementById('supportId').style.display = 'block'
+    } else {
+      let op = document.getElementById('supportId');
+      op.parentNode.removeChild(op);
+    }
+    function isSupport () {
+      var userAgent = navigator.userAgent;
+      var isFF = userAgent.indexOf('Firefox') > -1;
+      if (isFF) return true;
+      var isSafari = userAgent.indexOf('Safari') > -1;
+      if (isSafari) return true;
+      var isChrome = userAgent.indexOf('Chrome') > -1;
+      if (isChrome) return true;
+      var isEdge = userAgent.indexOf('Edge') > -1;
+      if (isEdge) return true;
+      return false
+    }
+  </script>
+  <% if(process.env.BUILD_ENV!='prod') { %>
+  <script src="//cnstatic01.e.vhall.com/3rdlibs/vue/2.5.16/vue.js"></script>
+  <% } else { %>
+  <script src="//cnstatic01.e.vhall.com/3rdlibs/vue/2.5.16/vue.runtime.min.js"></script>
+  <% } %>
+  <% if(process.env.BUILD_ENV!='prod') { %>
+  <script src="//static-zhike.vhall.com/fe_jssdk_test/1.0.0/zk-jssdk.js"></script>
+  <% } else { %>
+  <script src="//static-zhike.vhall.com/fe_jssdk_prod/1.0.0/zk-jssdk.min.js"></script>
+  <% } %>
+  <script src="//cnstatic01.e.vhall.com/3rdlibs/vue/2.5.16/vue.js"></script>
+  <script src="//cnstatic01.e.vhall.com/3rdlibs/element-ui/2.4.9/index.js"></script>
+  <script src="//cnstatic01.e.vhall.com/3rdlibs/yidun/captcha/load.min.js"></script>
+  <!-- 聊天消息 -->
+  <script src="//static.vhallyun.com/jssdk/vhall-jssdk-base/vhall-msg-2.0.0.js?oldver=1.0.11&t=5"></script>
+  <script src="//static.vhallyun.com/jssdk/vhall-jssdk-chat/3.0.0/vhall-jssdk-chat-3.0.0.js?t=5"></script>
+  <!-- 观看 -->
+  <script src="//static.vhallyun.com/jssdk/vhall-jssdk-player/latest/vhall-jssdk-player-2.3.1.js"></script>
+  <!-- 文档白板 -->
+  <script src="//static.vhallyun.com/jssdk/vhall-jssdk-doc/latest/vhall-jssdk-doc-3.1.6.js"></script>
+</body>
+</html>
